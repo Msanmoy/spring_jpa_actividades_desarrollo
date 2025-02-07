@@ -16,11 +16,17 @@ public class Socio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private long dni;
+    private long id;
+
+    @Column(unique = true, length = 9)
+    private String nif;
+
+    @Column(length = 30)
     private String nombre;
+
+    @Column(length = 120)
     private String apellidos;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "tarjeta_id", referencedColumnName = "numero")
+    @OneToOne(mappedBy = "socio")
     private Tarjeta tarjeta;
 }

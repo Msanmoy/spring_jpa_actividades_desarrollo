@@ -1,29 +1,27 @@
 package com.iesvdm.spring_jpa_actividades_desarrollo.domain;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Tarjeta {
+
+@Entity
+public class Categoria {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
-    private long id;
+    private Long id;
 
-    private String Numero;
-    private LocalDate Caducidad;
+    @Column(length = 25, nullable = false)
+    private String nombre;
 
-    @OneToOne
-    @JoinColumn(name = "socio_id", referencedColumnName = "id")
-    private Socio socio;
-
+    @OneToMany(mappedBy = "categoria")
+    private Set<PeliculaCategoria> peliculasCategorias;
 }
